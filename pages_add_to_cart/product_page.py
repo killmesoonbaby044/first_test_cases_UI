@@ -43,3 +43,7 @@ class ProductPage(BasePage):
         site_price = self.fe(*PageLoc.price_loc).text.split(' ')[0]
         print('Checking prices')
         assert price == site_price, "WRONG PRICE!"
+
+    def guest_can_go_to_login_page_from_product_page(self):
+        self.go_to_login_page()
+        self.should_be_login_page()

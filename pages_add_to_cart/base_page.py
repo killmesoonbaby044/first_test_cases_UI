@@ -21,7 +21,7 @@ class BasePage:
 
     def is_element_present(self, how, what):
         try:
-            WebDriverWait(self.browser, 4, TimeoutException). \
+            WebDriverWait(self.browser, 4). \
                 until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
@@ -29,29 +29,36 @@ class BasePage:
 
     def is_not_element_present(self, how, what):
         try:
-            WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.browser, 4). \
+                until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return True
         return False
 
     def is_disappeared(self, how, what):
         try:
-            WebDriverWait(self.browser, 4, 1, TimeoutException). \
+            WebDriverWait(self.browser, 4, 1). \
                 until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
         return True
 
     def go_to_login_page(self):
-        link = self.browser.find_element(*BPLoc.LOGIN_LINK)
-        link.click()
+        self.browser.find_element(*BPLoc.LOGIN_LINK).click()
 
-    def guest_can_go_to_login_page_from_product_page(self):
+    def should_be_login_page(self):
         assert self.browser.current_url == 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/', \
             'INCORRECT PAGE (NOT A LOGIN PAGE)'
 
     def should_be_login_link(self):
         assert self.is_element_present(*BPLoc.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket(self):
+        self.fe(*BPLoc.basket_button_loc).click()
+
+
+
+
 
     def solve_quiz_and_get_code(self):
         print('start quizMATHcode')

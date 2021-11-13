@@ -13,3 +13,9 @@ class PageLoc:
 class BPLoc:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    basket_button_loc = (By.CSS_SELECTOR, '.btn-group>a')
+
+
+class BasketLoc:
+    empty_basket_loc = (By.CSS_SELECTOR, '#content_inner>p>a')
+    basket_element_loc = (By.CLASS_NAME, 'basket-items')
