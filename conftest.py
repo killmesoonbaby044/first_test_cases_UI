@@ -3,7 +3,7 @@ from selenium import webdriver
 
 
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default='en',
+    parser.addoption('--language', action='store', default='en-gb',
                      help="Choose Your Hero(language): us,ru,fr")
 
 
@@ -14,11 +14,12 @@ def browser(request):
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     user_language = request.config.getoption('language')
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    options.add_argument("--incognito")
     browser = webdriver.Chrome(options=options)
     browser.maximize_window()
     yield browser
     print("\nquit browser..")
-    browser.delete_all_cookies()
+    #browser.delete_all_cookies()
     browser.implicitly_wait(5)
     browser.quit()
 

@@ -6,6 +6,14 @@ from selenium.common.exceptions import *
 
 import math
 
+"""
+PP - ProductPage
+BP - BasePage
+LOC - locator
+fe - find_element
+
+"""
+
 
 class BasePage:
     def __init__(self, browser, url):
@@ -47,17 +55,19 @@ class BasePage:
         self.browser.find_element(*BPLoc.LOGIN_LINK).click()
 
     def should_be_login_page(self):
-        assert self.browser.current_url == 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/', \
+        language = self.browser.execute_script('return window.navigator.userLanguage || window.navigator.language')
+        assert self.browser.current_url == f'http://selenium1py.pythonanywhere.com/{language}/accounts/login/', \
             'INCORRECT PAGE (NOT A LOGIN PAGE)'
 
     def should_be_login_link(self):
         assert self.is_element_present(*BPLoc.LOGIN_LINK), "Login link is not presented"
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BPLoc.USER_ICON), \
+            "User icon is not presented, probably unauthorised user"
+
     def go_to_basket(self):
         self.fe(*BPLoc.basket_button_loc).click()
-
-
-
 
 
     def solve_quiz_and_get_code(self):
