@@ -55,9 +55,9 @@ class BasePage:
         self.browser.find_element(*BPLoc.LOGIN_LINK).click()
 
     def should_be_login_page(self):
-        language = self.browser.execute_script('return window.navigator.userLanguage || window.navigator.language')
-        assert self.browser.current_url == f'http://selenium1py.pythonanywhere.com/{language}/accounts/login/', \
-            'INCORRECT PAGE (NOT A LOGIN PAGE)'
+        #language = self.browser.execute_script('return window.navigator.userLanguage || window.navigator.language')
+        print(self.browser.current_url)
+        assert self.browser.current_url == f'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/', 'INCORRECT PAGE (NOT A LOGIN PAGE)'
 
     def should_be_login_link(self):
         assert self.is_element_present(*BPLoc.LOGIN_LINK), "Login link is not presented"
