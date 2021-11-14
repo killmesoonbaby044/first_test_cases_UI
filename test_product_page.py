@@ -8,7 +8,7 @@ link = "http://selenium1py.pythonanywhere.com/catalogue/the-city-and-the-stars_9
 
 
 class TestBasket:
-    
+
     @pytest.mark.need_review
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
         page = BasketPage(browser, link)
